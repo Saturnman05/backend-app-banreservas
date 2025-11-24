@@ -1,0 +1,35 @@
+# --- Python ---
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Entornos virtuales ---
+.venv/
+venv/
+env/
+
+# --- Variables de entorno ---
+.env
+*.env
+
+# --- IDEs / Editores ---
+# VSCode
+.vscode/
+# PyCharm
+.idea/
+
+# --- Byte-compiled / caches ---
+*.egg-info/
+.eggs/
+.python-version
+
+# --- Logs ---
+*.log
+
+# --- OS-specific files ---
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
