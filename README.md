@@ -103,5 +103,5 @@ ENV=development
 ▶️ Ejecutar el servidor
 
 ```bash
-uvicorn app.main:app --reload
+python app/main.py
 ```
