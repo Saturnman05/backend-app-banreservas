@@ -7,12 +7,12 @@ router = APIRouter()
 
 
 @router.get("/")
-async def list_users():
-    return [
-        {"id": 1, "user": "pepito"},
-        {"id": 2, "user": "pepito"},
-        {"id": 3, "user": "pepito"},
-    ]
+async def list_users(repo: UserRepository = Depends(get_user_repository)):
+    try:
+        users = repo.list_all()
+        return users
+    except UserNotFound:
+        raise HTTPException(status_code=404, detail="User not found")
 
 
 @router.get("/{user_id}")
