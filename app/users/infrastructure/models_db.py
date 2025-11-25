@@ -3,10 +3,10 @@ from sqlalchemy.orm import relationship
 from core.database import Base
 
 
-class User(Base):
+class UserDB(Base):
     __tablename__ = "usuarios"
 
-    id = Column("id_cuenta", Integer, primary_key=True, index=True)
+    id = Column("id_usuario", Integer, primary_key=True, index=True)
     first_name = Column("nombre", String(50), nullable=False)
     last_name = Column("apellido", String(50), nullable=False)
     email = Column(String(100), nullable=False, unique=True)
@@ -15,6 +15,6 @@ class User(Base):
     username = Column(String(100), nullable=False, unique=True)
 
     # Relaciones
-    cuentas = relationship("Cuenta", back_populates="usuario")
-    tarjetas = relationship("Tarjeta", back_populates="usuario")
-    reclamaciones = relationship("Reclamacion", back_populates="usuario")
+    # cuentas = relationship("cuenta", back_populates="usuario")
+    # tarjetas = relationship("tarjeta", back_populates="usuario")
+    # reclamaciones = relationship("reclamacion", back_populates="usuario")
