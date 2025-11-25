@@ -22,4 +22,5 @@ class AuthService:
 
     @staticmethod
     def hash_password(password: str) -> str:
+        password = password[:72]
         return pwd_context.hash(password)
