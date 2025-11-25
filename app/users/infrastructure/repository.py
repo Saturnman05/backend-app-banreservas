@@ -59,6 +59,12 @@ class UserRepository:
             raise UserNotFound(f"User with id={id} not found")
         return self.to_domain(obj)
 
+    def get_by_username(self, username: str) -> User:
+        obj = self.db.query(UserDB).filter(UserDB.username == username).first()
+        if not obj:
+            raise UserNotFound(f"User with username={username} not found")
+        return self.to_domain(obj)
+
     def get_by_email(self, email: str) -> User:
         obj = self.db.query(UserDB).filter(UserDB.email == email).first()
         if not obj:
