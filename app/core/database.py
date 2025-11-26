@@ -24,3 +24,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+from users.infrastructure import models_db as users_models
+from accounts.infrastructure import models_db as accounts_models
