@@ -4,7 +4,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 from auth.application.dto import UserRegisterDTO
 from auth.domain.auth_service import AuthService
 from auth.domain.exceptions import InvalidCredentials
-from auth.infrastructure.dependencies import get_current_user
 from auth.infrastructure.jwt_manager import create_access_token
 
 from users.domain.models import User
@@ -31,16 +30,6 @@ async def login(
     token = create_access_token({"sub": str(user.id)})
 
     return {"access_token": token, "token_type": "bearer"}
-
-
-@router.get("/me")
-def get_me(current_user=Depends(get_current_user)):
-    return {
-        "id": current_user.id,
-        "username": current_user.username,
-        "email": current_user.email,
-        "full_name": current_user.full_name(),
-    }
 
 
 @router.post("/register")

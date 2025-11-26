@@ -1,26 +1,19 @@
 from fastapi import APIRouter, Depends, HTTPException
-from .domain.exceptions import UserNotFound
-from .infrastructure.dependencies import get_user_repository
-from .infrastructure.repository import UserRepository
+
+from auth.infrastructure.dependencies import get_current_user
+
+from users.domain.models import User
+
 
 router = APIRouter()
 
 
-@router.get("/")
-async def list_users(repo: UserRepository = Depends(get_user_repository)):
-    try:
-        users = repo.list_all()
-        return users
-    except UserNotFound:
-        raise HTTPException(status_code=404, detail="User not found")
-
-
-@router.get("/{user_id}")
-async def get_user_by_id(
-    user_id: int, repo: UserRepository = Depends(get_user_repository)
-):
-    try:
-        user = repo.get_by_id(user_id)
-        return user
-    except UserNotFound:
-        raise HTTPException(status_code=404, detail="User not found")
+@router.get("/me")
+def get_me(current_user: User = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email,
+        "full_name": current_user.full_name(),
+        "phone": current_user.phone,
+    }
