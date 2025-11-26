@@ -28,7 +28,7 @@ async def login(
     except InvalidCredentials as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    token = create_access_token({"sub": user.id})
+    token = create_access_token({"sub": str(user.id)})
 
     return {"access_token": token, "token_type": "bearer"}
 
