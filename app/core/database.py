@@ -9,7 +9,9 @@ engine = create_engine(
 )
 
 # Crea sesiones para los requests
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine, expire_on_commit=False
+)
 
 # Base para los modelos ORM
 Base = declarative_base()

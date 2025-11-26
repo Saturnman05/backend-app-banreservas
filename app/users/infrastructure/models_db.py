@@ -6,7 +6,7 @@ from core.database import Base
 class UserDB(Base):
     __tablename__ = "usuarios"
 
-    id = Column("id_usuario", Integer, primary_key=True, index=True)
+    id = Column("id_usuario", Integer, primary_key=True, index=True, autoincrement=True)
     first_name = Column("nombre", String(50), nullable=False)
     last_name = Column("apellido", String(50), nullable=False)
     email = Column(String(100), nullable=False, unique=True)
@@ -15,6 +15,6 @@ class UserDB(Base):
     username = Column(String(100), nullable=False, unique=True)
 
     # Relaciones
-    # cuentas = relationship("cuenta", back_populates="usuario")
-    # tarjetas = relationship("tarjeta", back_populates="usuario")
-    # reclamaciones = relationship("reclamacion", back_populates="usuario")
+    # cuentas = relationship("cuenta", back_populates="usuario", lazy="noload")
+    # tarjetas = relationship("tarjeta", back_populates="usuario", lazy="noload")
+    # reclamaciones = relationship("reclamacion", back_populates="usuario", lazy="noload")
