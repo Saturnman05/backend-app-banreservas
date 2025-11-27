@@ -15,5 +15,5 @@ class UserDB(Base):
     username = Column(String(100), nullable=False, unique=True)
 
     cuentas = relationship("AccountDB", back_populates="usuario")
-    cards = relationship("CardDB", back_populates="usuario")
+    tarjetas = relationship("CardDB", back_populates="usuario")
     # reclamaciones = relationship("reclamacion", back_populates="usuario", lazy="noload")
