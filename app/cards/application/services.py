@@ -7,10 +7,11 @@ class CardService:
         self.repo = repo
 
     def create_card(self, card: Card) -> Card:
-        card = self.repo.get_by_number(card.card_number)
-
         return self.repo.create(card)
 
     def get_cards_by_user(self, user_id: int) -> list[Card]:
         cards: list[Card] = self.repo.list_all_by_user_id(user_id)
         return cards
+
+    def get_card_by_number(self, card_number: str) -> Card:
+        return self.repo.get_by_number(card_number=card_number)
