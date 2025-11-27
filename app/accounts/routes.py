@@ -65,26 +65,6 @@ async def create_account(
     }
 
 
-@router.delete("/{account_number}")
-async def delete_account(
-    account_number: str,
-    current_user: User = Depends(get_current_user),
-    account_service: AccountService = Depends(get_accounts_service),
-):
-    try:
-        account_service.delete_account(account_number, current_user.id)
-    except AccountNotFound:
-        raise HTTPException(
-            status_code=404, detail=f"La cuenta {account_number} no existe"
-        )
-    except UnauthorizedAccountAccess:
-        raise HTTPException(
-            status_code=403, detail="No tienes permiso para eliminar esta cuenta"
-        )
-
-    return {"message": f"La cuenta {account_number} se elimino exitosamente"}
-
-
 @router.put("/{account_id}")
 async def update_account(
     account_id: int,
@@ -114,3 +94,23 @@ async def update_account(
             "balance": account.balance,
         },
     }
+
+
+@router.delete("/{account_number}")
+async def delete_account(
+    account_number: str,
+    current_user: User = Depends(get_current_user),
+    account_service: AccountService = Depends(get_accounts_service),
+):
+    try:
+        account_service.delete_account(account_number, current_user.id)
+    except AccountNotFound:
+        raise HTTPException(
+            status_code=404, detail=f"La cuenta {account_number} no existe"
+        )
+    except UnauthorizedAccountAccess:
+        raise HTTPException(
+            status_code=403, detail="No tienes permiso para eliminar esta cuenta"
+        )
+
+    return {"message": f"La cuenta {account_number} se elimino exitosamente"}
