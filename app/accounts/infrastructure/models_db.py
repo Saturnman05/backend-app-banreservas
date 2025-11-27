@@ -21,3 +21,4 @@ class AccountDB(Base):
 
     usuario = relationship("UserDB", back_populates="cuentas")
     tarjetas = relationship("CardDB", back_populates="cuenta")
+    claim = relationship("ClaimDB", back_populates="account")
