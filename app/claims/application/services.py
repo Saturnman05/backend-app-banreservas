@@ -7,7 +7,7 @@ class ClaimService:
     def __init__(self, repo: ClaimRepository):
         self.repo = repo
 
-    def create_card(self, card: Claim) -> Claim:
+    def create_claim(self, card: Claim) -> Claim:
         return self.repo.create(card)
 
     def list_claims_by_user(self, user_id: int) -> list[Claim]:
