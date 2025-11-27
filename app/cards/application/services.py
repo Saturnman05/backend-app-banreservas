@@ -1,5 +1,6 @@
 from cards.domain.models import Card
 from cards.infrastructure.repository import CardRepository
+from cards.domain.exceptions import CardNotFound, UnauthorizedCardAccess
 
 
 class CardService:
@@ -15,3 +16,13 @@ class CardService:
 
     def get_card_by_number(self, card_number: str) -> Card:
         return self.repo.get_by_number(card_number=card_number)
+
+    def delete_card(self, card_number: str, user_id: int):
+        card = self.get_card_by_number(card_number)
+        if card == None:
+            raise CardNotFound()
+
+        if card.user_id != user_id:
+            raise UnauthorizedCardAccess()
+
+        self.repo.delete(card.id)

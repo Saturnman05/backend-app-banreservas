@@ -6,7 +6,7 @@ from cards.application.dto import CardCreateDto
 from cards.application.services import CardService
 from cards.domain.models import Card
 from cards.infrastructure.repository import CardRepository
-from cards.domain.exceptions import CardNotFound
+from cards.domain.exceptions import CardNotFound, UnauthorizedCardAccess
 
 from core.database import get_db
 
@@ -59,3 +59,23 @@ async def create_card(
             "card_type": card.card_type,
         },
     }
+
+
+@router.delete("/{card_number}")
+async def delete(
+    card_number: str,
+    current_user: User = Depends(get_current_user),
+    card_service: CardService = Depends(get_cards_service),
+):
+    try:
+        card_service.delete_card(card_number, current_user.id)
+    except CardNotFound:
+        raise HTTPException(
+            status_code=404, detail=f"La tarjeta {card_number} no existe"
+        )
+    except UnauthorizedCardAccess:
+        raise HTTPException(
+            status_code=403, detail="No tienes permiso para eliminar esta tarjeta"
+        )
+
+    return {"message": f"La tarjeta {card_number} se elimino exitosamente"}
