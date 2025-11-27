@@ -20,3 +20,4 @@ class AccountDB(Base):
     balance = Column("saldo", DECIMAL(18, 2), nullable=False)
 
     usuario = relationship("UserDB", back_populates="cuentas")
+    tarjetas = relationship("CardDB", back_populates="cuenta")
