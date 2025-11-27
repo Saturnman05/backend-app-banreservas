@@ -1,5 +1,6 @@
 from accounts.infrastructure.repository import AccountRepository
 from accounts.domain.models import Account
+from accounts.domain.exceptions import AccountNotFound, UnauthorizedAccountAccess
 
 
 class AccountService:
@@ -19,3 +20,12 @@ class AccountService:
 
     def get_account_by_number(self, account_number: str) -> Account:
         return self.repo.get_by_number(account_number)
+
+    def delete_account(self, account_number: str, user_id: int):
+        account = self.get_account_by_number(account_number)
+        if not account:
+            raise AccountNotFound()
+
+        if account.user_id != user_id:
+            raise UnauthorizedAccountAccess()
+        self.repo.delete(account.id)
