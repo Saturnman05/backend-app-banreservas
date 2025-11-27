@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
-from accounts.infrastructure.models_db import AccountDB
+
 from accounts.domain.models import Account
 from accounts.domain.exceptions import AccountNotFound
+from accounts.infrastructure.models_db import AccountDB
 
 
 class AccountRepository:
@@ -52,7 +53,19 @@ class AccountRepository:
     def get_by_id(self, id: int) -> Account:
         obj = self.db.query(AccountDB).filter(AccountDB.id == id).first()
         if not obj:
-            raise AccountNotFound(f"User with id={id} not found")
+            raise AccountNotFound(f"Account with id={id} not found")
+        return self.to_domain(obj)
+
+    def get_by_number(self, account_number: str) -> Account:
+        obj = (
+            self.db.query(AccountDB)
+            .filter(AccountDB.account_number == account_number)
+            .first()
+        )
+        if not obj:
+            raise AccountNotFound(
+                f"Account with account_number={account_number} not found"
+            )
         return self.to_domain(obj)
 
     def list_all(self) -> list[Account]:
@@ -68,7 +81,7 @@ class AccountRepository:
     def update(self, id: int, **fields) -> Account:
         obj = self.db.query(AccountDB).filter(AccountDB.id == id).first()
         if not obj:
-            raise AccountNotFound(f"User with id={id} not found")
+            raise AccountNotFound(f"Account with id={id} not found")
 
         for key, value in fields.items():
             # evita campos inexistentes
@@ -82,7 +95,7 @@ class AccountRepository:
     def delete(self, id: int) -> None:
         obj = self.db.query(AccountDB).filter(AccountDB.id == id).first()
         if not obj:
-            raise AccountNotFound(f"User with id={id} not found")
+            raise AccountNotFound(f"Account with id={id} not found")
 
         self.db.delete(obj)
         self.db.commit()
