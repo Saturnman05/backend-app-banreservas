@@ -14,7 +14,6 @@ class UserDB(Base):
     hashed_password = Column(String(200), nullable=False)
     username = Column(String(100), nullable=False, unique=True)
 
-    # Relaciones
-    # cuentas = relationship("cuenta", back_populates="usuario", lazy="noload")
+    cuentas = relationship("AccountDB", back_populates="usuario")
     # tarjetas = relationship("tarjeta", back_populates="usuario", lazy="noload")
     # reclamaciones = relationship("reclamacion", back_populates="usuario", lazy="noload")
