@@ -10,3 +10,7 @@ class AccountCreate(BaseModel):
 
 class AccountDelete(BaseModel):
     account_number: Annotated[str, StringConstraints(min_length=11)]
+
+
+class AccountUpdate(BaseModel):
+    balance: float

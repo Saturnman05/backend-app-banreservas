@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from accounts.application.dto import AccountCreate
+from accounts.application.dto import AccountCreate, AccountUpdate
 from accounts.application.services import AccountService
 from accounts.domain.models import Account
 from accounts.domain.exceptions import AccountNotFound, UnauthorizedAccountAccess
@@ -55,7 +55,7 @@ async def create_account(
     account = account_service.create_account(account)
 
     return {
-        "message": "Usuario creado exitosamente",
+        "message": "Cuenta creada exitosamente",
         "account": {
             "id": account.id,
             "account_number": account.account_number,
@@ -83,3 +83,34 @@ async def delete_account(
         )
 
     return {"message": f"La cuenta {account_number} se elimino exitosamente"}
+
+
+@router.put("/{account_id}")
+async def update_account(
+    account_id: int,
+    data: AccountUpdate,
+    current_user: User = Depends(get_current_user),
+    account_service: AccountService = Depends(get_accounts_service),
+):
+    try:
+        account = account_service.update_account(
+            account_id, current_user.id, data.balance
+        )
+    except AccountNotFound:
+        raise HTTPException(
+            status_code=404, detail=f"La cuenta con id={account_id} no existe"
+        )
+    except UnauthorizedAccountAccess:
+        raise HTTPException(
+            status_code=403, detail="No tienes permiso para eliminar esta cuenta"
+        )
+
+    return {
+        "message": "Cuenta actualizada exitosamente",
+        "account": {
+            "id": account.id,
+            "account_number": account.account_number,
+            "account_type": account.account_type,
+            "balance": account.balance,
+        },
+    }
