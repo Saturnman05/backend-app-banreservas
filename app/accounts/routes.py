@@ -102,7 +102,7 @@ async def update_account(
         )
     except UnauthorizedAccountAccess:
         raise HTTPException(
-            status_code=403, detail="No tienes permiso para eliminar esta cuenta"
+            status_code=403, detail="No tienes permiso para modificar esta cuenta"
         )
 
     return {
