@@ -28,3 +28,4 @@ def get_db():
 
 from users.infrastructure import models_db as users_models
 from accounts.infrastructure import models_db as accounts_models
+from cards.infrastructure import models_db as card_models
