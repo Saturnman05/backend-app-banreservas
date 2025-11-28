@@ -19,7 +19,7 @@ class ClaimService:
         return claims
 
     def delete_claim(self, claim_id: str, user_id: int):
-        claim = self.get_claim_by_id(claim_id)
+        claim: Claim = self.get_claim_by_id(claim_id)
 
         if claim.user_id != user_id:
             raise UnauthorizedClaimAccess()
@@ -30,3 +30,4 @@ class ClaimService:
         claim = self.repo.get_by_id(claim_id)
         if claim == None:
             raise ClaimNotFound()
+        return claim
