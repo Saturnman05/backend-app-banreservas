@@ -1,0 +1,9 @@
+from pydantic import BaseModel
+
+
+class Account(BaseModel):
+    id: int | None
+    user_id: int
+    account_number: str
+    account_type: str
+    balance: float
