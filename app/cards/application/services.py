@@ -1,6 +1,6 @@
-from cards.domain.models import Card
-from cards.infrastructure.repository import CardRepository
-from cards.domain.exceptions import CardNotFound, UnauthorizedCardAccess
+from app.cards.domain.models import Card
+from app.cards.infrastructure.repository import CardRepository
+from app.cards.domain.exceptions import CardNotFound, UnauthorizedCardAccess
 
 
 class CardService:

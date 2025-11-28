@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
-from auth.application.dto import UserRegisterDTO
-from auth.domain.auth_service import AuthService
-from auth.domain.exceptions import InvalidCredentials
-from auth.infrastructure.jwt_manager import create_access_token
+from app.auth.application.dto import UserRegisterDTO
+from app.auth.domain.auth_service import AuthService
+from app.auth.domain.exceptions import InvalidCredentials
+from app.auth.infrastructure.jwt_manager import create_access_token
 
-from users.domain.models import User
-from users.domain.exceptions import UserNotFound
-from users.infrastructure.dependencies import get_user_repository
-from users.infrastructure.repository import UserRepository
+from app.users.domain.models import User
+from app.users.domain.exceptions import UserNotFound
+from app.users.infrastructure.dependencies import get_user_repository
+from app.users.infrastructure.repository import UserRepository
 
 
 router = APIRouter()

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from accounts.domain.models import Account
-from accounts.domain.exceptions import AccountNotFound
-from accounts.infrastructure.models_db import AccountDB
+from app.accounts.domain.models import Account
+from app.accounts.domain.exceptions import AccountNotFound
+from app.accounts.infrastructure.models_db import AccountDB
 
 
 class AccountRepository:

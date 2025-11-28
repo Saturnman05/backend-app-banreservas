@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from auth.infrastructure.dependencies import get_current_user
+from app.auth.infrastructure.dependencies import get_current_user
 
-from cards.application.dto import CardCreateDto
-from cards.application.services import CardService
-from cards.domain.models import Card
-from cards.infrastructure.repository import CardRepository
-from cards.domain.exceptions import CardNotFound, UnauthorizedCardAccess
+from app.cards.application.dto import CardCreateDto
+from app.cards.application.services import CardService
+from app.cards.domain.models import Card
+from app.cards.infrastructure.repository import CardRepository
+from app.cards.domain.exceptions import CardNotFound, UnauthorizedCardAccess
 
-from core.database import get_db
+from app.core.database import get_db
 
-from users.domain.models import User
+from app.users.domain.models import User
 
 router = APIRouter()
 

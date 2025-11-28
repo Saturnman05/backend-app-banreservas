@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from accounts.application.dto import AccountCreate, AccountUpdate
-from accounts.application.services import AccountService
-from accounts.domain.models import Account
-from accounts.domain.exceptions import AccountNotFound, UnauthorizedAccountAccess
-from accounts.infrastructure.repository import AccountRepository
+from app.accounts.application.dto import AccountCreate, AccountUpdate
+from app.accounts.application.services import AccountService
+from app.accounts.domain.models import Account
+from app.accounts.domain.exceptions import AccountNotFound, UnauthorizedAccountAccess
+from app.accounts.infrastructure.repository import AccountRepository
 
-from auth.infrastructure.dependencies import get_current_user
+from app.auth.infrastructure.dependencies import get_current_user
 
-from core.database import get_db
+from app.core.database import get_db
 
-from users.domain.models import User
+from app.users.domain.models import User
 
 router = APIRouter()
 

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from claims.domain.models import Claim
-from claims.domain.exceptions import ClaimNotFound
-from claims.infrastructure.models_db import ClaimDB
+from app.claims.domain.models import Claim
+from app.claims.domain.exceptions import ClaimNotFound
+from app.claims.infrastructure.models_db import ClaimDB
 
 
 class ClaimRepository:

@@ -1,6 +1,6 @@
-from claims.domain.models import Claim
-from claims.infrastructure.repository import ClaimRepository
-from claims.domain.exceptions import ClaimNotFound, UnauthorizedClaimAccess
+from app.claims.domain.models import Claim
+from app.claims.infrastructure.repository import ClaimRepository
+from app.claims.domain.exceptions import ClaimNotFound, UnauthorizedClaimAccess
 
 
 class ClaimService:

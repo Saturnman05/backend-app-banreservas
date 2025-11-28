@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from core.config import settings
+from app.core.config import settings
 
 # Conexión a la base de datos en la nube
 engine = create_engine(
@@ -26,7 +26,7 @@ def get_db():
         db.close()
 
 
-from users.infrastructure import models_db as users_models
-from accounts.infrastructure import models_db as accounts_models
-from cards.infrastructure import models_db as card_models
-from claims.infrastructure import models_db as claim_models
+from app.users.infrastructure import models_db as users_models
+from app.accounts.infrastructure import models_db as accounts_models
+from app.cards.infrastructure import models_db as card_models
+from app.claims.infrastructure import models_db as claim_models

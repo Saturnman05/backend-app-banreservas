@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
-from users.infrastructure.repository import UserRepository
-from auth.domain.exceptions import InvalidCredentials
+from app.users.infrastructure.repository import UserRepository
+from app.auth.domain.exceptions import InvalidCredentials
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

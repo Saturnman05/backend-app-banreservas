@@ -1,5 +1,5 @@
 from fastapi import Depends
-from core.database import get_db
+from app.core.database import get_db
 from .repository import UserRepository
 
 

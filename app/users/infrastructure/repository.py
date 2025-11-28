@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from users.infrastructure.models_db import UserDB
-from users.domain.models import User
-from users.domain.exceptions import UserNotFound
+from app.users.infrastructure.models_db import UserDB
+from app.users.domain.models import User
+from app.users.domain.exceptions import UserNotFound
 
 
 class UserRepository:

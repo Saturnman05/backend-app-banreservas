@@ -1,10 +1,10 @@
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from auth.infrastructure.jwt_manager import verify_token
+from app.auth.infrastructure.jwt_manager import verify_token
 
-from users.domain.models import User
-from users.infrastructure.dependencies import get_user_repository
-from users.infrastructure.repository import UserRepository
+from app.users.domain.models import User
+from app.users.infrastructure.dependencies import get_user_repository
+from app.users.infrastructure.repository import UserRepository
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 

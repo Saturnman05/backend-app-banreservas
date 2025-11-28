@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from cards.domain.models import Card
-from cards.domain.exceptions import CardNotFound
-from cards.infrastructure.models_db import CardDB
+from app.cards.domain.models import Card
+from app.cards.domain.exceptions import CardNotFound
+from app.cards.infrastructure.models_db import CardDB
 
 
 class CardRepository:

@@ -1,6 +1,9 @@
-from accounts.infrastructure.repository import AccountRepository
-from accounts.domain.models import Account
-from accounts.domain.exceptions import AccountNotFound, UnauthorizedAccountAccess
+from app.accounts.infrastructure.repository import AccountRepository
+from app.accounts.domain.models import Account
+from app.accounts.domain.exceptions import (
+    AccountNotFound,
+    UnauthorizedAccountAccess,
+)
 
 
 class AccountService:

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from auth.infrastructure.dependencies import get_current_user
+from app.auth.infrastructure.dependencies import get_current_user
 
-from users.domain.models import User
+from app.users.domain.models import User
 
 
 router = APIRouter()

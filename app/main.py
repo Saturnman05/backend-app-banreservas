@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 
-from accounts.routes import router as accounts_router
-from auth.routes import router as auth_router
-from cards.routes import router as cards_router
-from claims.routes import router as claims_router
-from users.routes import router as users_router
+from app.accounts.routes import router as accounts_router
+from app.auth.routes import router as auth_router
+from app.cards.routes import router as cards_router
+from app.claims.routes import router as claims_router
+from app.users.routes import router as users_router
 
-from core.config import ENV, DEV
+from app.core.config import ENV, DEV
 
 import os
 import uvicorn

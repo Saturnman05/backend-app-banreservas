@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from auth.infrastructure.dependencies import get_current_user
+from app.auth.infrastructure.dependencies import get_current_user
 
-from claims.domain.models import Claim
-from claims.infrastructure.repository import ClaimRepository
-from claims.application.services import ClaimService
-from claims.application.dto import ClaimCreateDto
-from claims.domain.exceptions import ClaimNotFound, UnauthorizedClaimAccess
+from app.claims.domain.models import Claim
+from app.claims.infrastructure.repository import ClaimRepository
+from app.claims.application.services import ClaimService
+from app.claims.application.dto import ClaimCreateDto
+from app.claims.domain.exceptions import ClaimNotFound, UnauthorizedClaimAccess
 
-from core.database import get_db
+from app.core.database import get_db
 
-from users.domain.models import User
+from app.users.domain.models import User
 
 router = APIRouter()
 
