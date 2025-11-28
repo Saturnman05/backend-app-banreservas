@@ -8,6 +8,7 @@ from users.routes import router as users_router
 
 from core.config import ENV, DEV
 
+import os
 import uvicorn
 
 app = FastAPI()
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="127.0.0.1" if ENV == DEV else "0.0.0.0",
-        port=8000,
+        port=os.environ.get("PORT", 8000),
         reload=(ENV == DEV),
         workers=1 if ENV == DEV else 4,
     )
