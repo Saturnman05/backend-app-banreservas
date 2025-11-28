@@ -10,8 +10,12 @@ class ClaimService:
     def create_claim(self, card: Claim) -> Claim:
         return self.repo.create(card)
 
-    def list_claims_by_user(self, user_id: int) -> list[Claim]:
-        claims: list[Claim] = self.repo.list_all_by_user_id(user_id)
+    def list_claims(self, account_id=None, card_id=None, user_id=None) -> list[Claim]:
+        claims: list[Claim] = self.repo.list_all_filtered(
+            account_id=account_id,
+            card_id=card_id,
+            user_id=user_id,
+        )
         return claims
 
     def delete_claim(self, claim_id: str, user_id: int):
@@ -26,11 +30,3 @@ class ClaimService:
         claim = self.repo.get_by_id(claim_id)
         if claim == None:
             raise ClaimNotFound()
-
-    def list_claims_by_account(self, account_id: int) -> list[Claim]:
-        claims = self.repo.list_by_account(account_id)
-        return claims
-
-    def list_claims_by_card(self, card_id: int) -> list[Claim]:
-        claims = self.repo.list_by_card(card_id)
-        return claims

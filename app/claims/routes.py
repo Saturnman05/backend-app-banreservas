@@ -21,20 +21,17 @@ def get_claims_service(db=Depends(get_db)):
 
 @router.get("/")
 async def list_claims(
+    account_id: int | None = None,
+    card_id: int | None = None,
     current_user: User = Depends(get_current_user),
     claim_service: ClaimService = Depends(get_claims_service),
 ):
-    claims = claim_service.list_claims_by_user(current_user.id)
-    return claims
-
-
-@router.get("/account/{account_id}")
-async def list_claims_by_account(
-    account_id: int,
-    _: User = Depends(get_current_user),
-    claim_service: ClaimService = Depends(get_claims_service),
-):
-    claims = claim_service.list_claims_by_account(account_id)
+    # claims = claim_service.list_claims_by_user(current_user.id)
+    claims = claim_service.list_claims(
+        account_id=account_id,
+        user_id=current_user.id,
+        card_id=card_id,
+    )
     return claims
 
 

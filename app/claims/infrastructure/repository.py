@@ -62,23 +62,21 @@ class ClaimRepository:
         records = self.db.query(ClaimDB).all()
         return [self.to_domain(r) for r in records]
 
-    def list_by_account(self, account_id: int) -> list[Claim]:
-        records: list[ClaimDB] = self.db.query(ClaimDB).filter(
-            ClaimDB.account_id == account_id
-        )
-        return [self.to_domain(r) for r in records]
+    def list_all_filtered(
+        self, account_id=None, card_id=None, user_id=None
+    ) -> list[Claim]:
+        query = self.db.query(ClaimDB)
 
-    def list_by_card(self, card_id: int) -> list[Claim]:
-        records: list[ClaimDB] = self.db.query(ClaimDB).filter(
-            ClaimDB.card_id == card_id
-        )
-        return [self.to_domain(r) for r in records]
+        if account_id:
+            query = query.filter(ClaimDB.account_id == account_id)
 
-    def list_all_by_user_id(self, user_id: int) -> list[Claim]:
-        records: list[ClaimDB] = self.db.query(ClaimDB).filter(
-            ClaimDB.user_id == user_id
-        )
-        return [self.to_domain(r) for r in records]
+        if card_id:
+            query = query.filter(ClaimDB.card_id == card_id)
+
+        if user_id:
+            query = query.filter(ClaimDB.user_id == user_id)
+
+        return query.all()
 
     def update(self, id: int, **fields) -> Claim:
         obj = self.db.query(ClaimDB).filter(ClaimDB.id == id).first()
