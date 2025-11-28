@@ -16,4 +16,4 @@ class UserDB(Base):
 
     cuentas = relationship("AccountDB", back_populates="usuario")
     tarjetas = relationship("CardDB", back_populates="usuario")
-    # reclamaciones = relationship("reclamacion", back_populates="usuario", lazy="noload")
+    claims = relationship("ClaimDB", back_populates="user")
