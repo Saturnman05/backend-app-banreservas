@@ -22,7 +22,7 @@ app.include_router(users_router, prefix="/user", tags=["User"])
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        host="127.0.0.1",
+        host="127.0.0.1" if ENV == DEV else "0.0.0.0",
         port=8000,
         reload=(ENV == DEV),
         workers=1 if ENV == DEV else 4,
